@@ -45,6 +45,7 @@ struct GameView: View {
                     .padding()
                     .border(Color.white, width: 2)
                 Button("Enter") {
+                    print("button is clicked")
                     socketManager.sendMessage(message: userInput)
                     isRepeated = controller.isUsedWord(wordToBeTested: userInput)
                     isValidRule = controller.shiritoriRuleChecker(wordToBeTested: userInput, acceptedWord: acceptedWord)
@@ -53,8 +54,24 @@ struct GameView: View {
                             DispatchQueue.main.async {
                                 self.isValidWord = isValid
                                 if isValid {
+                                    
                                     self.acceptedWord = userInput
                                     controller.addToUsedWords(wordToAdd: self.acceptedWord)
+                                    var lastLetter = String (self.acceptedWord.last ?? "a")
+                                    
+                                   
+                                    controller.fetchWordStartingWith(letter: lastLetter) { word in
+                                        DispatchQueue.main.async {
+                                                               if let newWord = word {
+                                                                   self.acceptedWord = newWord
+                                                                   controller.addToUsedWords(wordToAdd: self.acceptedWord)
+                                                                   message = ""
+                                                               } else {
+                                                                   print("error on AI")
+                                                               }
+                                                           }
+                                    }
+                                    userInput = ""
                                     score += 10
                                     message = ""
                                 } else {
@@ -71,6 +88,7 @@ struct GameView: View {
                             self.isValidWord = false
                             message = Constant.messages.violdatedRule
                             score -= 10
+                            userInput = ""
                             print("The word must start with the last letter of the accepted word")
                             
                         }

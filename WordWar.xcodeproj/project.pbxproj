@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		367D5A4B2B07676D00F622A9 /* FetchFromAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367D5A4A2B07676D00F622A9 /* FetchFromAI.swift */; };
 		36D932592AF354890042437F /* WordWarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D932582AF354890042437F /* WordWarApp.swift */; };
 		36D9325B2AF354890042437F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D9325A2AF354890042437F /* ContentView.swift */; };
 		36D9325D2AF354890042437F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D9325C2AF354890042437F /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		367D5A4A2B07676D00F622A9 /* FetchFromAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFromAI.swift; sourceTree = "<group>"; };
 		36D932552AF354890042437F /* WordWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WordWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D932582AF354890042437F /* WordWarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordWarApp.swift; sourceTree = "<group>"; };
 		36D9325A2AF354890042437F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				36D9325E2AF354890042437F /* Preview Content */,
 				36D932682AF354C40042437F /* Constants.swift */,
 				36D932AD2AF359720042437F /* UsedWords.swift */,
+				367D5A4A2B07676D00F622A9 /* FetchFromAI.swift */,
 			);
 			path = WordWar;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				36D932AE2AF359720042437F /* UsedWords.swift in Sources */,
 				36D932592AF354890042437F /* WordWarApp.swift in Sources */,
 				36D932B42AF35A650042437F /* RegisterViewModel.swift in Sources */,
+				367D5A4B2B07676D00F622A9 /* FetchFromAI.swift in Sources */,
 				36D932A52AF357080042437F /* LoginView.swift in Sources */,
 				36D932B02AF35A460042437F /* ContentViewModel.swift in Sources */,
 				36D932A92AF357B10042437F /* GameView.swift in Sources */,
