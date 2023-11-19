@@ -84,11 +84,11 @@ class GameController {
     }
     
     func addToUsedWords(wordToAdd: String){
-        UsedWords.typedWords.insert(wordToAdd)
+        UsedWords.typedWords.append(wordToAdd)
     }
     
     func fetchWordStartingWith(letter: String, completion: @escaping (String?) -> Void) {
-        let url = URL(string: "https://api.datamuse.com/words?sp=\(letter)*")!
+        let url = URL(string: "\(Constant.API.findWordWithStartLetter)\(letter)*")!
         var request = URLRequest(url: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"

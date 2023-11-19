@@ -12,6 +12,7 @@ struct Constant {
     struct API{
         static let randomWordAPI = "Qx5dAHAoCTEyw1oiAvnu+g==ZtHdHwGHZJB0xvzx"
         static let wordCheckAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/"
+        static let findWordWithStartLetter = "https://api.datamuse.com/words?sp="
     }
     struct messages{
         static let invalidMSG = "The word is not in dictionary"

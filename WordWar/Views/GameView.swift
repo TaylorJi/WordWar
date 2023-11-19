@@ -41,9 +41,19 @@ struct GameView: View {
                 
                 Spacer()
                 Text(socketManager.receivedMessage)
+           
+                
+                List(Array(UsedWords.typedWords.enumerated()), id: \.element) { index, word in
+                    Text("\(index + 1). \(word)")
+                    
+                }
                 TextField("Enter a word", text: $userInput)
                     .padding()
                     .border(Color.white, width: 2)
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                
+                
+                
                 Button("Enter") {
                     print("button is clicked")
                     socketManager.sendMessage(message: userInput)
@@ -119,6 +129,7 @@ struct GameView: View {
         }
     }
     
+    // this function is for multi-player game
     func initiateRealtimeWord(){
         socketManager.word
     }

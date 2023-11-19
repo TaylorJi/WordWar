@@ -8,5 +8,5 @@
 import Foundation
 
 struct UsedWords{
-    static var typedWords: Set<String> = []
+    static var typedWords: Array<String> = []
 }
