@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine  
+
 
 struct GameView: View {
     @State private var acceptedWord = ""
@@ -15,17 +17,28 @@ struct GameView: View {
     @State private var isValidRule: Bool? = nil
     @State private var message = ""
     @State private var score = 0
+    @State private var timer: Timer.TimerPublisher?
+
+    @State private var timeRemaining = 60
+    @State private var cancellables = Set<AnyCancellable>()
+
+
     @ObservedObject var socketManager = SocketIOManager()
     
     
     private var controller = GameController()
+//    private let gameViewModel = GameViewModel()
     var body: some View {
         ZStack{
             Color.green.ignoresSafeArea(.all)
             VStack{
+                Text("Time Remaining: \(timeRemaining)")
+                              .font(.title)
+                
                 /*
                  For score
                  */
+                
                 HStack{
                     Text(Constant.score.gmaeScore)
                         .foregroundColor(.yellow)
@@ -67,9 +80,8 @@ struct GameView: View {
                                     
                                     self.acceptedWord = userInput
                                     controller.addToUsedWords(wordToAdd: self.acceptedWord)
-                                    var lastLetter = String (self.acceptedWord.last ?? "a")
+                                    let lastLetter = String (self.acceptedWord.last ?? "a")
                                     
-                                   
                                     controller.fetchWordStartingWith(letter: lastLetter) { word in
                                         DispatchQueue.main.async {
                                                                if let newWord = word {
@@ -108,9 +120,37 @@ struct GameView: View {
                 }.foregroundColor(.red)
                 
             }
-            .onAppear(perform: loadFirstRandomWord)
+            .onAppear{
+                loadFirstRandomWord()
+                startTimer()
+                
+            }
+            .onReceive(timer ?? Timer.publish(every: 1, on: .main, in: .common)) { _ in
+                         if timeRemaining > 0 {
+                             timeRemaining -= 1
+                         } else {
+                             print("Time's up")
+                             stopTimer()
+                         }
+                     }
+       
+            
             
         }
+    }
+    
+    
+    func startTimer() {
+        timer = Timer.publish(every: 1, on: .main, in: .common)
+        timer?.connect().store(in: &cancellables)
+        
+        // Reset timer
+        timeRemaining = 60
+    }
+    
+    
+    func stopTimer() {
+        timer?.connect().cancel()
     }
     
     

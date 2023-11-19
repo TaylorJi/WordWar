@@ -7,10 +7,6 @@
 
 import Foundation
 
-import Foundation
-
-
-
 class GameController {
     
     struct Word: Codable {
@@ -124,13 +120,5 @@ class GameController {
     }
 
     
-    
-    
-//    func shiritoriRuleChecker(wordToBeTested: String, acceptedWord: String) -> Bool {
-//        if wordToBeTested.first.uppercased() == acceptedWord.last {
-//            return true
-//        }
-//        return false
-//    }
     
 }
