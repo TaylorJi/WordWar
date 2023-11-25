@@ -36,11 +36,6 @@ class RegisterViewViewModel: ObservableObject {
                     self?.errMsg = "unknown error occurred"
                 }
             }
-            
-//           guard let userId = result?.user.uid else {
-//              return
-//           }
-//           self?.insertUserRecord(id: userId)
         }
 
         

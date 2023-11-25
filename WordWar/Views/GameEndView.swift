@@ -26,21 +26,18 @@ struct GameEndView: View {
                              Text("\(score.email): \(score.score)")
                          }
 
-//                if !topScores.isEmpty {
-//                    List(topScores, id: \.email) { score in
-//                        Text("\(score.email): \(score.score)")
-//                    }
-//                } else {
-//                    Text("Loading top scores...")
-//                }
-
                 Button("Play again") {
                     isShowingGameView = true
                 }
+                .foregroundColor(.white)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 30) // Fill the entire space
+                .background(Color.red)
+                .cornerRadius(10) // Adjust corner radius to your preference
             }
-            .navigationTitle("Score Board")
+            .navigationTitle("War is over")
+ 
             .navigationDestination(isPresented: $isShowingGameView) {
-                GameView() // Replace with your actual GameView initialization if needed
+                GameView() 
             }
             .onAppear {
                 updateAndFetchScores()
@@ -68,34 +65,3 @@ struct GameEndView_Previews: PreviewProvider {
 
 
 
-
-//struct GameEndView: View {
-//    let userScore: Int
-//    let userEmail: String
-//    @State private var isShowingGameView = false
-//    @State private var topScores: [Int] = []
-//    @StateObject var gameEndViewModel = GameEndViewModel()
-//    var body: some View {
-//        NavigationStack{
-//            VStack{
-//                Text("Your score is \(userScore)")
-//                    .bold()
-//                    .foregroundStyle(.red)
-//                Text("End Game View")
-//                Button("Play again") {
-//                    isShowingGameView = true
-//                    
-//                }
-//            }
-//            .navigationTitle("Score Board")
-//            .navigationDestination(isPresented: $isShowingGameView){
-//                GameView()
-//            }
-//        }
-//    }
-//}
-//
-//#Preview {
-//    // preview set the default game score: 20, test@test.ca
-//    GameEndView(userScore: 20, userEmail: "test@test.ca")
-//}

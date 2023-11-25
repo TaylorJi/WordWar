@@ -15,9 +15,9 @@ struct ContentView: View {
         VStack {
             NavigationStack{
                 ZStack{
-                    Color(red: 0.20, green: 0.60, blue: 0.86).edgesIgnoringSafeArea(.all)
+                    Color(red: 1.00, green: 0.20, blue: 0.06).edgesIgnoringSafeArea(.all)
                     VStack{
-                        Text("Welcome to Shiritori Game!")
+                        Text("Welcome to Word War")
                             .font(.title)
                             .bold()
                             .foregroundColor(.white)

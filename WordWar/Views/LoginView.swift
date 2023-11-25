@@ -65,13 +65,8 @@ struct LoginView: View {
                 }
                 .frame(maxHeight: .infinity)
                 
-           
-                
-             
-                
                 Spacer()
             }
-            .navigationTitle("Login")
         }
     }
 }

@@ -27,8 +27,8 @@ struct GameView: View {
     // socket for multi-player
 //    @ObservedObject var socketManager = SocketIOManager()
     
-    
-    private var controller = GameController()
+    private var gameViewModel = GameViewModel()
+//    private var controller = GameController()
 //    private let gameViewModel = GameViewModel()
     var body: some View {
         let currentUserEmail = UserManager.shared.getCurrentUserEmail() ?? "Unknown"
@@ -58,6 +58,7 @@ struct GameView: View {
                     Text(message).foregroundColor(.red)
                     
                     Spacer()
+                    // socket testing for online feature
 //                    Text(socketManager.receivedMessage)
                     
                     
@@ -74,23 +75,23 @@ struct GameView: View {
                     
                     Button("Enter") {
 //                        socketManager.sendMessage(message: userInput)
-                        isRepeated = controller.isUsedWord(wordToBeTested: userInput)
-                        isValidRule = controller.shiritoriRuleChecker(wordToBeTested: userInput, acceptedWord: acceptedWord)
+                        isRepeated = gameViewModel.isUsedWord(wordToBeTested: userInput)
+                        isValidRule = gameViewModel.shiritoriRuleChecker(wordToBeTested: userInput, acceptedWord: acceptedWord)
                         if isValidRule == true && isRepeated == false{
-                            controller.isWordValid(word: userInput) { isValid in
+                            gameViewModel.isWordValid(word: userInput) { isValid in
                                 DispatchQueue.main.async {
                                     self.isValidWord = isValid
                                     if isValid {
                                         
                                         self.acceptedWord = userInput
-                                        controller.addToUsedWords(wordToAdd: self.acceptedWord)
+                                        gameViewModel.addToUsedWords(wordToAdd: self.acceptedWord)
                                         let lastLetter = String (self.acceptedWord.last ?? "a")
                                         
-                                        controller.fetchWordStartingWith(letter: lastLetter) { word in
+                                        gameViewModel.fetchWordStartingWith(letter: lastLetter) { word in
                                             DispatchQueue.main.async {
                                                 if let newWord = word {
                                                     self.acceptedWord = newWord
-                                                    controller.addToUsedWords(wordToAdd: self.acceptedWord)
+                                                    gameViewModel.addToUsedWords(wordToAdd: self.acceptedWord)
                                                     message = ""
                                                 } else {
                                                     print("error on AI")
@@ -131,7 +132,7 @@ struct GameView: View {
                 .onAppear{
                     loadFirstRandomWord()
                     startTimer()
-                    controller.clearUserWords()
+                    gameViewModel.clearUserWords()
                     
                 }
                 .onReceive(timer ?? Timer.publish(every: 1, on: .main, in: .common)) { _ in
@@ -167,9 +168,9 @@ struct GameView: View {
     
     
     func loadFirstRandomWord() {
-        controller.firstRandomWord { word in
+        gameViewModel.firstRandomWord { word in
             if let word = word {
-                if let extractedWord = controller.extractWord(from: word){
+                if let extractedWord = gameViewModel.extractWord(from: word){
                     self.acceptedWord = extractedWord
                 } else {
                     self.acceptedWord = "Error"
