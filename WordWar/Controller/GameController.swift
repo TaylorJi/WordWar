@@ -114,6 +114,10 @@ class GameController {
             }
         }.resume()
     }
+    
+    func clearUserWords() {
+        UsedWords.typedWords.removeAll()
+    }
 
     struct DatamuseWord: Codable {
         let word: String

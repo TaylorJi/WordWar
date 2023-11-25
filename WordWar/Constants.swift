@@ -22,6 +22,9 @@ struct Constant {
         static let gmaeScore = "Game Score: "
         
     }
+    struct timer {
+        static let timer = 90
+    }
     
     
 }

@@ -15,15 +15,29 @@ class LoginViewViewModel : ObservableObject{
     @Published var errMsg: String = ""
 
     init(){}
-    
-    func login() {
-        guard validate() else {
-            return
+        
+    func login(completion: @escaping (Bool) -> Void) {
+            guard validate() else {
+                completion(false)
+                return
+            }
+            
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self?.errMsg = error.localizedDescription
+                        completion(false)
+                       
+                    } else if let user = result?.user {
+                        UserManager.shared.setCurrentUserEmail(user.email ?? "")
+                        completion(true)
+                    } else {
+                        self?.errMsg = "An unknown error occurred."
+                        completion(false)
+                    }
+                }
+            }
         }
-        
-        Auth.auth().signIn(withEmail: email, password: password) // sign in
-        
-    }
     
     private func validate() -> Bool {
       errMsg = ""

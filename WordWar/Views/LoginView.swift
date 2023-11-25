@@ -30,14 +30,14 @@ struct LoginView: View {
                       
                     Button("Log In") {
                         // firebase will handle authentication
-                        print("Email: \($email)")
-                        print("Password: \($password)")
-                        loginViewModel.login()
-                        if loginViewModel.errMsg == "" {
-                            isShowingGameView = true
-                            loginViewModel.email = ""
-                            loginViewModel.password = ""
-                        }
+                        loginViewModel.login { success in
+                                  if success {
+                                      isShowingGameView = true
+                                      loginViewModel.email = ""
+                                      loginViewModel.password = ""
+                                  } // No need to handle failure here as errMsg will be updated
+                              }
+                    
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)

@@ -21,16 +21,6 @@ struct ContentView: View {
                             .font(.title)
                             .bold()
                             .foregroundColor(.white)
-//                        Button("Play"){
-//                            print("Play is clicked")
-//                            showGameView = true
-//                        }
-//                        .foregroundColor(.red)
-//                        .font(.system(size:25))
-//                        .navigationDestination(isPresented: $showGameView) {
-//                                               LoginView()
-//                                           }
-//
                         LoginView()
                         
                     }

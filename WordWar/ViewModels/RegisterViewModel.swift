@@ -14,6 +14,8 @@ class RegisterViewViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var errMsg = ""
+    @Published var isShowingLoginView = false // For navigation
+
     
     init() {
         
@@ -24,10 +26,21 @@ class RegisterViewViewModel: ObservableObject {
             return
         }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-           guard let userId = result?.user.uid else {
-              return
-           }
-           self?.insertUserRecord(id: userId)
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.errMsg = error.localizedDescription
+                } else if let userId = result?.user.uid{
+                    self?.insertUserRecord(id: userId)
+                    self?.isShowingLoginView = true
+                } else {
+                    self?.errMsg = "unknown error occurred"
+                }
+            }
+            
+//           guard let userId = result?.user.uid else {
+//              return
+//           }
+//           self?.insertUserRecord(id: userId)
         }
 
         
@@ -50,7 +63,7 @@ class RegisterViewViewModel: ObservableObject {
           guard !email.trimmingCharacters(in: .whitespaces).isEmpty,
                 !password.trimmingCharacters(in: .whitespaces).isEmpty
           else {
-             errMsg = "Please fill in name, email and password fields."
+             errMsg = "Please fill in email and password fields."
              return false
           }
           
