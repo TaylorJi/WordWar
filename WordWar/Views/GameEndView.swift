@@ -9,48 +9,74 @@ import SwiftUI
 
 struct GameEndView: View {
     let userScore: Int
-    let userEmail: String // Assuming you have the user's email
-
+    let userEmail: String // Assuming you have user's email
     @State private var isShowingGameView = false
     @State private var topScores: [(email: String, score: Int)] = []
     @StateObject var gameEndViewModel = GameEndViewModel()
 
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("\(userEmail) score is \(userScore)")
-                    .bold()
-                    .foregroundStyle(.red)
-                Text("Rankings")
-                List(gameEndViewModel.topScores, id: \.email) { score in
-                             Text("\(score.email): \(score.score)")
-                         }
-
-                Button("Play again") {
-                    isShowingGameView = true
+            ZStack {
+                // Use a gradient for the background
+                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .edgesIgnoringSafeArea(.all)
+        
+                VStack(spacing: 20) {
+                    Text("\(userEmail) score is \(userScore)")
+                        .bold()
+                        .foregroundColor(.white)
+                        .font(.title3)
+                    List(gameEndViewModel.topScores.indices, id: \.self) { index in
+                        HStack {
+                            Group {
+                                if index == 0 {
+                                    Text("🥇")
+                                } else if index == 1 {
+                                    Text("🥈")
+                                } else if index == 2 {
+                                    Text("🥉")
+                                } else {
+                                    Text("\(index + 1).")
+                                        .font(.system(size: 20))
+                                }
+                            }
+                            .font(.system(size: 40))
+                            
+                            Text("\(gameEndViewModel.topScores[index].email):")
+                                .foregroundColor(.black)
+                                .font(.headline)
+                            Spacer()
+                            Text("\(gameEndViewModel.topScores[index].score)")
+                                .foregroundColor(.black)
+                                .font(.headline)
+                        }
+                        .padding(.vertical)
+                    }
+                    
+//                    Button(action: {
+//                        isShowingGameView = true
+//                    }) {
+//                        Text("Play again")
+//                            .font(.headline)
+//                            .padding()
+//                            .background(Color.white)
+//                            .foregroundColor(.purple)
+//                            .cornerRadius(10)
+//                            .shadow(radius: 10)
+//                    }
                 }
-                .foregroundColor(.white)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 30) // Fill the entire space
-                .background(Color.red)
-                .cornerRadius(10) // Adjust corner radius to your preference
+                .cornerRadius(30)
+                .padding(20)
             }
-            .navigationTitle("War is over")
- 
+            .navigationTitle("War is Over")
             .navigationDestination(isPresented: $isShowingGameView) {
-                GameView() 
+                GameView()
             }
             .onAppear {
-                updateAndFetchScores()
+                gameEndViewModel.updateScoreIfNeeded(forEmail: userEmail, with: userScore)
+                gameEndViewModel.fetchTopScores()
             }
         }
-    }
-
-    private func updateAndFetchScores() {
-        // Update the user's score
-        gameEndViewModel.updateScoreIfNeeded(forEmail: userEmail, with: userScore)
-
-        // Fetch the top scores
-        gameEndViewModel.fetchTopScores()
     }
 }
 
@@ -61,7 +87,6 @@ struct GameEndView_Previews: PreviewProvider {
         GameEndView(userScore: 20, userEmail: "example@example.com")
     }
 }
-
 
 
 

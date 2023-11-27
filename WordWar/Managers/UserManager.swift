@@ -11,6 +11,7 @@ class UserManager {
     static let shared = UserManager()
 
     var currentUserEmail: String?
+    var currentUserScore: Int?
 
     private init() {}
 
@@ -20,5 +21,13 @@ class UserManager {
 
     func getCurrentUserEmail() -> String? {
         return currentUserEmail
+    }
+
+    func setCurrentUserScore(_ score: Int) {
+        currentUserScore = score
+    }
+
+    func getCurrentUserScore() -> Int? {
+        return currentUserScore
     }
 }

@@ -11,23 +11,27 @@ struct ContentView: View {
     @State private var navigateToDetail = false
     @State private var showGameView = false
     @StateObject var viewModel = ContentViewViewModel()
+
     var body: some View {
-        VStack {
-            NavigationStack{
-                ZStack{
-                    Color(red: 1.00, green: 0.20, blue: 0.06).edgesIgnoringSafeArea(.all)
-                    VStack{
-                        Text("Welcome to Word War")
-                            .font(.title)
-                            .bold()
-                            .foregroundColor(.white)
-                        LoginView()
-                        
-                    }
+        NavigationStack {
+            ZStack {
+                // Use a gradient for the background
+                LinearGradient(gradient: Gradient(colors: [Color.red, Color.purple]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .edgesIgnoringSafeArea(.all)
+
+                VStack{
+                    Text("Login")
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundColor(.white)
+                    
+                    LoginView()
+                        .cornerRadius(30)
+                        .shadow(radius: 10)
                 }
+                .padding()
             }
         }
- 
     }
 }
 

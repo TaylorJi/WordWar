@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Combine  
+import Combine
 
 
 struct GameView: View {
@@ -19,23 +19,27 @@ struct GameView: View {
     @State private var score = 0
     @State private var timer: Timer.TimerPublisher?
     @State private var isShowingGameEndView = false
-
+    
     @State private var timeRemaining = Constant.timer.timer
     @State private var cancellables = Set<AnyCancellable>()
-
-
+    
+    
     // socket for multi-player
-//    @ObservedObject var socketManager = SocketIOManager()
+    //    @ObservedObject var socketManager = SocketIOManager()
     
     private var gameViewModel = GameViewModel()
-//    private var controller = GameController()
-//    private let gameViewModel = GameViewModel()
+    //    private var controller = GameController()
+    //    private let gameViewModel = GameViewModel()
+    
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
     var body: some View {
         let currentUserEmail = UserManager.shared.getCurrentUserEmail() ?? "Unknown"
-
+        
         NavigationStack{
             ZStack{
-                Color.green.ignoresSafeArea(.all)
+                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .ignoresSafeArea(.all)
                 VStack{
                     Text("Time Remaining: \(timeRemaining)")
                         .font(.title)
@@ -59,22 +63,23 @@ struct GameView: View {
                     
                     Spacer()
                     // socket testing for online feature
-//                    Text(socketManager.receivedMessage)
+                    //                    Text(socketManager.receivedMessage)
                     
                     
                     List(Array(UsedWords.typedWords.enumerated()), id: \.element) { index, word in
                         Text("\(index + 1). \(word)")
-                        
+                            .foregroundColor(.black)
+                            .font(.headline)
                     }
+                    .cornerRadius(10)
                     TextField("Enter a word", text: $userInput)
                         .padding()
-                        .border(Color.white, width: 2)
-                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
-                    
-                    
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .autocapitalization(.none)
                     
                     Button("Enter") {
-//                        socketManager.sendMessage(message: userInput)
+                        //                        socketManager.sendMessage(message: userInput)
                         isRepeated = gameViewModel.isUsedWord(wordToBeTested: userInput)
                         isValidRule = gameViewModel.shiritoriRuleChecker(wordToBeTested: userInput, acceptedWord: acceptedWord)
                         if isValidRule == true && isRepeated == false{
@@ -122,11 +127,15 @@ struct GameView: View {
                         }
                         
                         
-                    }.foregroundColor(.red)
+                    }.foregroundColor(.purple)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
                         .navigationDestination(isPresented: $isShowingGameEndView) {
-                                               GameEndView(userScore: score, userEmail: currentUserEmail)
-                                           }
-
+                            GameEndView(userScore: score, userEmail: currentUserEmail)
+                        }
+                    
                     
                 }
                 .onAppear{
@@ -144,9 +153,7 @@ struct GameView: View {
                         
                     }
                 }
-                
-                
-                
+                .padding()
             }
         }
     }
@@ -182,9 +189,9 @@ struct GameView: View {
     }
     
     // this function is for multi-player game
-//    func initiateRealtimeWord(){
-//        socketManager.word
-//    }
+    //    func initiateRealtimeWord(){
+    //        socketManager.word
+    //    }
     
 }
 

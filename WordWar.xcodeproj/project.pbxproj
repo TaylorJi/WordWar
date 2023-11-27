@@ -56,6 +56,8 @@
 		36D932B92AF35CB90042437F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D932B82AF35CB90042437F /* Extensions.swift */; };
 		36D932DB2AF38C600042437F /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D932DA2AF38C600042437F /* SocketIOManager.swift */; };
 		36D932DE2AF38C8B0042437F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 36D932DD2AF38C8B0042437F /* SocketIO */; };
+		A09E12912B144B0800569057 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E12902B144B0800569057 /* LandingView.swift */; };
+		A09E12952B146B5E00569057 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E12942B146B5E00569057 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,8 @@
 		36D932B62AF35B0F0042437F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		36D932B82AF35CB90042437F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		36D932DA2AF38C600042437F /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		A09E12902B144B0800569057 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		A09E12942B146B5E00569057 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,8 @@
 				36D932A62AF357730042437F /* RegisterView.swift */,
 				36D932A82AF357B10042437F /* GameView.swift */,
 				361648312B09FC5500252F4F /* GameEndView.swift */,
+				A09E12902B144B0800569057 /* LandingView.swift */,
+				A09E12942B146B5E00569057 /* HeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 				36D932A72AF357730042437F /* RegisterView.swift in Sources */,
 				36D932AE2AF359720042437F /* UsedWords.swift in Sources */,
 				361648342B0AB4F500252F4F /* GameEndViewModel.swift in Sources */,
+				A09E12912B144B0800569057 /* LandingView.swift in Sources */,
 				361648302B09F7F700252F4F /* GameViewModel.swift in Sources */,
 				36D932592AF354890042437F /* WordWarApp.swift in Sources */,
 				36D932B42AF35A650042437F /* RegisterViewModel.swift in Sources */,
@@ -341,6 +348,7 @@
 				36D932A92AF357B10042437F /* GameView.swift in Sources */,
 				36D932B92AF35CB90042437F /* Extensions.swift in Sources */,
 				36D932B72AF35B0F0042437F /* User.swift in Sources */,
+				A09E12952B146B5E00569057 /* HeaderView.swift in Sources */,
 				36D932DB2AF38C600042437F /* SocketIOManager.swift in Sources */,
 				36D932692AF354C40042437F /* Constants.swift in Sources */,
 				36D932B22AF35A540042437F /* LoginViewModel.swift in Sources */,

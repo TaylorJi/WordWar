@@ -10,62 +10,76 @@ import SwiftUI
 struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
-    @State private var isShowingGameView = false
+    @State private var isShowingLandingView = false
     @State private var isShowingRegisterView = false
     @StateObject var loginViewModel = LoginViewViewModel()
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Form {
-                    if !loginViewModel.errMsg.isEmpty {
-                        Text(loginViewModel.errMsg)
-                            .foregroundColor(.red)
-                    }
-                    TextField("Email", text: $loginViewModel.email)
-                        .autocapitalization(.none)
-                        .keyboardType(.emailAddress)
+            ZStack{
+                VStack {
+                    Form {
+                        if !loginViewModel.errMsg.isEmpty {
+                            Text(loginViewModel.errMsg)
+                                .foregroundColor(.red)
+                        }
+                        TextField("Email", text: $loginViewModel.email)
+                            .autocapitalization(.none)
+                            .keyboardType(.emailAddress)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 10)
+                            .padding(.top, 50)
 
-                    SecureField("Password", text: $loginViewModel.password)
-                      
-                    Button("Log In") {
-                        // firebase will handle authentication
-                        loginViewModel.login { success in
-                                  if success {
-                                      isShowingGameView = true
-                                      loginViewModel.email = ""
-                                      loginViewModel.password = ""
-                                  } // No need to handle failure here as errMsg will be updated
-                              }
-                    
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(5.0)
-                    
-                    Button("Sign Up") {
-                        // navigate to register view
-                        isShowingRegisterView = true
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .cornerRadius(5.0)
-                    
+                        SecureField("Password", text: $loginViewModel.password)
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 10)
+                            .padding(.top, 10)
+                        
+                        Button("Log In") {
+                            // firebase will handle authentication
+                            loginViewModel.login { success in
+                                if success {
+                                    isShowingLandingView = true
+                                    loginViewModel.email = ""
+                                    loginViewModel.password = ""
+                                } // No need to handle failure here as errMsg will be updated
+                            }
+                        }
+                        .foregroundColor(.purple)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        .padding(.top, 10)
+                        
+                        Button("Sign Up") {
+                            // navigate to register view
+                            isShowingRegisterView = true
+                        }
+                        .foregroundColor(.purple)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        .padding(.top, 10)
 
-                    .navigationDestination(isPresented: $isShowingGameView) {
-                                           GameView()
-                                       }
-                    .navigationDestination(isPresented: $isShowingRegisterView) {
-                                           RegisterView()
-                                       }
+                        .navigationDestination(isPresented: $isShowingLandingView) {
+                            LandingView()
+                        }
+                        .navigationDestination(isPresented: $isShowingRegisterView) {
+                            RegisterView()
+                        }
+                    }
+                    .frame(maxHeight: .infinity)
+                    
+                    Spacer()
                 }
-                .frame(maxHeight: .infinity)
-                
-                Spacer()
             }
         }
     }
