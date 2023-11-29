@@ -16,7 +16,7 @@ struct ContentView: View {
         NavigationStack {
             ZStack {
                 // Use a gradient for the background
-                LinearGradient(gradient: Gradient(colors: [Color.red, Color.purple]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [Color.primary, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
 
                 VStack{

@@ -18,7 +18,7 @@ struct GameEndView: View {
         NavigationStack {
             ZStack {
                 // Use a gradient for the background
-                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [Color.primary, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
         
                 VStack(spacing: 20) {
@@ -68,7 +68,15 @@ struct GameEndView: View {
                 .cornerRadius(30)
                 .padding(20)
             }
-            .navigationTitle("War is Over")
+            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                ToolbarItem(placement: .principal) {
+                                    Text("War is Over")
+                                        .foregroundColor(Color.red) // Change the color here
+                                        .font(.title)
+                                        .bold()
+                                }
+                            }
             .navigationDestination(isPresented: $isShowingGameView) {
                 GameView()
             }

@@ -38,11 +38,12 @@ struct GameView: View {
         
         NavigationStack{
             ZStack{
-                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [Color.primary, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea(.all)
                 VStack{
                     Text("Time Remaining: \(timeRemaining)")
                         .font(.title)
+                        .foregroundColor(.red)
                     
                     /*
                      For score
@@ -58,8 +59,9 @@ struct GameView: View {
                     }
                     Text(acceptedWord)
                         .foregroundColor(.white)
-                        .font(.system(size: 35))
-                    Text(message).foregroundColor(.red)
+                        .font(.system(size: 40))
+                        .bold()
+                    Text(message).foregroundColor(.red).bold()
                     
                     Spacer()
                     // socket testing for online feature

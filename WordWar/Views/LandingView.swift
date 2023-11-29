@@ -20,7 +20,7 @@ struct LandingView: View {
         TabView(selection: $selectedTab) {
             ZStack {
                 // Use a gradient for the background
-                LinearGradient(gradient: Gradient(colors: [Color.purple, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [Color.primary, Color.red]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
