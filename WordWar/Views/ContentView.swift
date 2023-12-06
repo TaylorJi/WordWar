@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var navigateToDetail = false
     @State private var showGameView = false
+    @State private var path = NavigationPath()
     @StateObject var viewModel = ContentViewViewModel()
 
     var body: some View {

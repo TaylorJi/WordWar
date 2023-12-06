@@ -1,15 +1,13 @@
 //
-//  GameView.swift
+//  MultipPlayerView.swift
 //  WordWar
 //
-//  Created by Taylor Ji on 2023-11-01.
+//  Created by Taylor Ji on 2023-12-04.
 //
 
 import SwiftUI
-import Combine
 
-
-struct GameView: View {
+struct MultipPlayerView: View {
     @State private var acceptedWord = ""
     @State private var userInput = ""
     @State private var isRepeated : Bool? = nil
@@ -22,18 +20,17 @@ struct GameView: View {
     
     
     @State private var timeRemaining = Constant.timer.timer
-    @State private var cancellables = Set<AnyCancellable>()
+//    @State private var cancellables = Set<AnyCancellable>()
     
     
     // socket for multi-player
-    //    @ObservedObject var socketManager = SocketIOManager()
+        @ObservedObject var socketManager = SocketIOManager()
     
     private var gameViewModel = GameViewModel()
     //    private var controller = GameController()
     //    private let gameViewModel = GameViewModel()
     
     @Environment(\.verticalSizeClass) var verticalSizeClass
-
     var body: some View {
         let currentUserEmail = UserManager.shared.getCurrentUserEmail() ?? "Unknown"
         
@@ -65,8 +62,10 @@ struct GameView: View {
                     Text(message).foregroundColor(.red).bold()
                     
                     Spacer()
-                    // socket testing for online feature
-                    //                    Text(socketManager.receivedMessage)
+//                     socket testing for online feature
+                    Text(socketManager.receivedMessage)
+                        .foregroundColor(.white)
+                        .bold()
                     
                     
                     List(Array(UsedWords.typedWords.enumerated()), id: \.element) { index, word in
@@ -82,7 +81,7 @@ struct GameView: View {
                         .autocapitalization(.none)
                     
                     Button("Enter") {
-                        //                        socketManager.sendMessage(message: userInput)
+                                                socketManager.sendMessage(message: userInput)
                         isRepeated = gameViewModel.isUsedWord(wordToBeTested: userInput)
                         isValidRule = gameViewModel.shiritoriRuleChecker(wordToBeTested: userInput, acceptedWord: acceptedWord)
                         if isValidRule == true && isRepeated == false{
@@ -142,45 +141,43 @@ struct GameView: View {
                     
 //                    NavigationLink(destination: GameEndView(userScore: score, userEmail: currentUserEmail), isActive: $isShowingGameEndView) {
 //                        EmptyView()
-//                         
+//
 //                    }
                     
                     
                 }
                 .onAppear{
                     loadFirstRandomWord()
-                    startTimer()
+//                    startTimer()
                     gameViewModel.clearUserWords()
                     
                 }
                 .onReceive(timer ?? Timer.publish(every: 1, on: .main, in: .common)) { _ in
-                    if timeRemaining > 0 {
-                        timeRemaining -= 1
-                    } else {
-                        print("Time's up")
-                        stopTimer()
-                        
-                    }
+//                    if timeRemaining > 0 {
+//                        timeRemaining -= 1
+//                    } else {
+//                        print("Time's up")
+////                        stopTimer()
+//                        
+//                    }
                 }
                 .padding()
             }
         }
     }
-    
-    
-    func startTimer() {
-        timer = Timer.publish(every: 1, on: .main, in: .common)
-        timer?.connect().store(in: &cancellables)
-        
-        // Reset timer
-        timeRemaining = timeRemaining
-    }
-    
-    
-    func stopTimer() {
-        timer?.connect().cancel()
-        isShowingGameEndView = true
-    }
+//    func startTimer() {
+//        timer = Timer.publish(every: 1, on: .main, in: .common)
+//        timer?.connect().store(in: &cancellables)
+//        
+//        // Reset timer
+//        timeRemaining = timeRemaining
+//    }
+//    
+//    
+//    func stopTimer() {
+//        timer?.connect().cancel()
+//        isShowingGameEndView = true
+//    }
     
     
     func loadFirstRandomWord() {
@@ -198,12 +195,11 @@ struct GameView: View {
     }
     
     // this function is for multi-player game
-    //    func initiateRealtimeWord(){
-    //        socketManager.word
-    //    }
-    
+        func initiateRealtimeWord(){
+            socketManager.word
+        }
 }
 
 #Preview {
-    GameView()
+    MultipPlayerView()
 }

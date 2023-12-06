@@ -13,47 +13,51 @@ class GameEndViewModel : ObservableObject {
 
     private var db = Firestore.firestore()
     
-    func updateScoreIfNeeded (forEmail email: String, with newScore: Int) {
-        db.collection("users")
-                  .whereField("email", isEqualTo: email)
-                  .getDocuments { [weak self] querySnapshot, err in
-                      if let err = err {
-                          print("Error getting documents: \(err)")
-                          return
-                      }
+    func updateScoreIfNeeded(forEmail email: String, with newScore: Int, completion: @escaping () -> Void) {
+            db.collection("test")
+                .whereField("email", isEqualTo: email)
+                .getDocuments { [weak self] querySnapshot, err in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                        completion()
+                        return
+                    }
 
-                      guard let document = querySnapshot?.documents.first else {
-                          print("No user found with this email.")
-                          return
-                      }
+                    guard let document = querySnapshot?.documents.first else {
+                        print("No user found with this email.")
+                        completion()
+                        return
+                    }
 
-                      let userId = document.documentID
-                      if let currentScore = document.data()["score"] as? Int {
-                          // Step 2: Compare Scores and Update if Necessary
-                          if newScore > currentScore {
-                              self?.updateScore(for: userId, with: newScore)
-                          } else {
-                              print("New score is not higher than the current score.")
-                          }
-                      }
-                  }
-    }
+                    let userId = document.documentID
+                    if let currentScore = document.data()["score"] as? Int {
+                        // Step 2: Compare Scores and Update if Necessary
+                        if newScore > currentScore {
+                            self?.updateScore(for: userId, with: newScore, completion: completion)
+                        } else {
+                            print("New score is not higher than the current score.")
+                            completion()
+                        }
+                    }
+                }
+        }
     
-    private func updateScore(for userId: String, with newScore: Int) {
-            let userDocument = db.collection("users").document(userId)
+        private func updateScore(for userId: String, with newScore: Int, completion: @escaping () -> Void) {
+            let userDocument = db.collection("test").document(userId)
 
             userDocument.updateData(["score": newScore]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated with new score")
+                    completion() // Call the completion handler after successful update
                 }
             }
         }
 
 
     func fetchTopScores() {
-        db.collection("users")
+        db.collection("test")
           .order(by: "score", descending: true)
           .limit(to: 5)
           .getDocuments { (querySnapshot, err) in

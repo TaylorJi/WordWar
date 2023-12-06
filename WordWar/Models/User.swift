@@ -11,4 +11,5 @@ struct User: Codable {
    let id: String
    let email: String
    let joined: TimeInterval
+    let score: Int
 }
