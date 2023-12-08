@@ -8,6 +8,8 @@
 import Foundation
 
 extension Encodable {
+    // add new functionality to an existing class, struct, enumeration, or protocol type
+    // convert an instance of any type that conforms to the Encodable protocol into a dictionary of type [String: Any].
    func asDictionary() -> [String: Any] {
       guard let data = try? JSONEncoder().encode(self) else {
          return [:]
