@@ -50,5 +50,10 @@ Welcome to the iOS Word War game repository! This game challenges players to sco
 - **DataMuse API**: Assists the computer in picking correct words without validating game rules.
 
 
+### Further Development for Multip Player Game
+- Singleton Design Pattern for consistent game view for all users
+- Socket Server for real-time, bi-directional communication between the client and server
+
+
 
 Happy gaming!
