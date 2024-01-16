@@ -56,15 +56,15 @@ struct LandingView: View {
                         }
                         .padding(.top, 50)
                         
-                        NavigationLink(destination: MultipPlayerView()) {
-                            Text("PVP")
-                                .font(.headline)
-                                .padding()
-                                .background(Color.white)
-                                .foregroundColor(.purple)
-                                .cornerRadius(30)
-                                .shadow(radius: 10)
-                        }
+//                        NavigationLink(destination: MultipPlayerView()) {
+//                            Text("PVP")
+//                                .font(.headline)
+//                                .padding()
+//                                .background(Color.white)
+//                                .foregroundColor(.purple)
+//                                .cornerRadius(30)
+//                                .shadow(radius: 10)
+//                        }
                         .padding(.top, 50)
                     }
                 }
