@@ -1,7 +1,13 @@
 Welcome to the iOS Word War game repository! This game challenges players to score the highest by forming words under specific rules. Enjoy both single-player modes. Below are the instructions for getting started, playing the game, and testing various features.
 
-<img src="images/GamePlay.png" title="Game Play" width="400"/> <img src="images/LeaderBoard.png" title="Leader Board" width="400"/>
-
+<div>
+  <p>Game Play</p>
+  <img src="images/GamePlay.png" width="400"/>
+</div>
+<div>
+  <p>Leader Board</p>
+  <img src="images/LeaderBoard.png" width="400"/>
+</div>
 
 ## Getting Started
 
