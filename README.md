@@ -2,9 +2,10 @@ Welcome to the iOS Word War game repository! This game challenges players to sco
 
 ## Screenshots
 <div>
-  <p>Game Play</p>
+   <p style="font-weight: bold;">Game Play</p>
   <img src="images/GamePlay.png" width="400"/>
 </div>
+<br>
 <div>
   <p>Leader Board</p>
   <img src="images/LeaderBoard.png" width="400"/>
