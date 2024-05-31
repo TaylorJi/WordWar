@@ -11,7 +11,6 @@ import Foundation
 struct Constant {
     struct API{
         static let rnadomWordAPI = "https://api.api-ninjas.com/v1/randomword"
-        static let randomWordAPIKey = "Qx5dAHAoCTEyw1oiAvnu+g==ZtHdHwGHZJB0xvzx"
         static let wordCheckAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/"
         static let findWordWithStartLetter = "https://api.datamuse.com/words?sp="
     }

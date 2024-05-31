@@ -20,7 +20,7 @@ class GameViewModel {
             let url = URL(string: Constant.API.rnadomWordAPI)!
             var request = URLRequest(url: url)
             request.setValue(apiKey, forHTTPHeaderField: "X-Api-Key")
-
+            
             let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
                 if let data = data, let word = String(data: data, encoding: .utf8) {
                     completion(word)
@@ -30,18 +30,6 @@ class GameViewModel {
             }
             task.resume()
         }
-//        let url = URL(string: Constant.API.rnadomWordAPI)!
-//        var request = URLRequest(url: url)
-//        request.setValue(Constant.API.randomWordAPIKey, forHTTPHeaderField: "X-Api-Key")
-//
-//        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-//            if let data = data, let word = String(data: data, encoding: .utf8) {
-//                completion(word)
-//            } else {
-//                completion(nil)
-//            }
-//        }
-//        task.resume()
     }
 
     func isWordValid(word: String, completion: @escaping (Bool) -> Void) {
