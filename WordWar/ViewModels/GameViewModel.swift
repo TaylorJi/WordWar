@@ -12,18 +12,36 @@ class GameViewModel {
         let word: String
     }
     func firstRandomWord(completion: @escaping (String?) -> Void) {
-        let url = URL(string: Constant.API.rnadomWordAPI)!
-        var request = URLRequest(url: url)
-        request.setValue(Constant.API.randomWordAPIKey, forHTTPHeaderField: "X-Api-Key")
+        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
+           let xml = FileManager.default.contents(atPath: path),
+           let secrets = try? PropertyListDecoder().decode([String: String].self, from: xml) {
+            let apiKey = secrets["RANDOMWORDAPIKEY"]!
+            print("API Key: \(String(describing: apiKey))")
+            let url = URL(string: Constant.API.rnadomWordAPI)!
+            var request = URLRequest(url: url)
+            request.setValue(apiKey, forHTTPHeaderField: "X-Api-Key")
 
-        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
-            if let data = data, let word = String(data: data, encoding: .utf8) {
-                completion(word)
-            } else {
-                completion(nil)
+            let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+                if let data = data, let word = String(data: data, encoding: .utf8) {
+                    completion(word)
+                } else {
+                    completion(nil)
+                }
             }
+            task.resume()
         }
-        task.resume()
+//        let url = URL(string: Constant.API.rnadomWordAPI)!
+//        var request = URLRequest(url: url)
+//        request.setValue(Constant.API.randomWordAPIKey, forHTTPHeaderField: "X-Api-Key")
+//
+//        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+//            if let data = data, let word = String(data: data, encoding: .utf8) {
+//                completion(word)
+//            } else {
+//                completion(nil)
+//            }
+//        }
+//        task.resume()
     }
 
     func isWordValid(word: String, completion: @escaping (Bool) -> Void) {

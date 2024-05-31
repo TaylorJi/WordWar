@@ -60,6 +60,7 @@
 		36D932B92AF35CB90042437F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D932B82AF35CB90042437F /* Extensions.swift */; };
 		36D932DB2AF38C600042437F /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D932DA2AF38C600042437F /* SocketIOManager.swift */; };
 		36D932DE2AF38C8B0042437F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 36D932DD2AF38C8B0042437F /* SocketIO */; };
+		36F33F4B2C09ABC6008E54EA /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36F33F4A2C09ABC6008E54EA /* Secrets.plist */; };
 		A09E12912B144B0800569057 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E12902B144B0800569057 /* LandingView.swift */; };
 		A09E12952B146B5E00569057 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E12942B146B5E00569057 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		36D932B62AF35B0F0042437F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		36D932B82AF35CB90042437F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		36D932DA2AF38C600042437F /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		36F33F4A2C09ABC6008E54EA /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		A09E12902B144B0800569057 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		A09E12942B146B5E00569057 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,6 +166,7 @@
 				36D9325E2AF354890042437F /* Preview Content */,
 				36D932682AF354C40042437F /* Constants.swift */,
 				36D932AD2AF359720042437F /* UsedWords.swift */,
+				36F33F4A2C09ABC6008E54EA /* Secrets.plist */,
 			);
 			path = WordWar;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36F33F4B2C09ABC6008E54EA /* Secrets.plist in Resources */,
 				36D932602AF354890042437F /* Preview Assets.xcassets in Resources */,
 				36D9325D2AF354890042437F /* Assets.xcassets in Resources */,
 				36B120472B10828C00A6F0B6 /* GoogleService-Info.plist in Resources */,

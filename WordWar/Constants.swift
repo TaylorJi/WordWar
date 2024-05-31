@@ -24,7 +24,7 @@ struct Constant {
         
     }
     struct timer {
-        static let timer = 120
+        static let timer = 60
     }
     
     
