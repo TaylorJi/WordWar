@@ -106,8 +106,23 @@ struct GameView: View {
                                                 }
                                             }
                                         }
+                                        gameViewModel.checkWordDifficulty(word: userInput) { tenDegree in
+                                            DispatchQueue.main.async {
+                                                if let tenDegree = tenDegree {
+                                                    let baseScore = 10
+                                                    let intTenDegree = Int(tenDegree)
+                                                    let increment = baseScore * intTenDegree
+                                                    print("The ten_degree of the word  is \(tenDegree)")
+                                                    print("check is ")
+                                                    score = score + increment
+                                                    print("Score is \(score)")
+                                                    // Update UI or handle the ten_degree value
+                                                } else {
+                                                    print("Failed to retrieve the ten_degree.")
+                                                }
+                                            }
+                                        }
                                         userInput = ""
-                                        score += 10
                                         message = ""
                                     } else {
                                         message = Constant.messages.invalidMSG
